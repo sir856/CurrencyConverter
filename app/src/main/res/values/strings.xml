@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CurrencyConverter</string>
+    <string name="ConvertFrom">Конвертировать из</string>
+    <string name="ConvertTo">Конвертировать в</string>
+    <string name="Convert">Конвертировать</string>
+    <string name="Nominal">Номинал</string>
+    <string name="Date">Дата</string>
+    <string name="DefaultValue">1</string>
+    <string name="DefaultDate">01.02.2019</string>
+    <string-array name="currencies">
+        <item>EUR</item>
+        <item>USD</item>
+        <item>RUB</item>
+        <item>JPY</item>
+    </string-array>
+</resources>

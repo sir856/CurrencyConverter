@@ -2,10 +2,8 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/Container"
@@ -90,7 +88,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000"
-                android:hint="@string/Date"
                 android:focusable="false"
                 android:clickable="true"
                 />
@@ -112,15 +109,25 @@
         android:text="@string/Convert"
         />
 
-    <TextView
-        android:id="@+id/Answer"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginStart="7dp"
         android:layout_marginEnd="7dp"
-        app:layout_constraintTop_toBottomOf="@id/ConvertBtn"
-        android:textColor="#000"
-        android:gravity="center"/>
+        app:layout_constraintTop_toBottomOf="@id/ConvertBtn">
+
+        <TextView
+            android:id="@+id/Answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="17dp"
+            android:text="@string/Result"
+            android:gravity="center"/>
+
+    </android.support.v7.widget.CardView>
+
+
 
 </android.support.constraint.ConstraintLayout>

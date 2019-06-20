@@ -7,6 +7,8 @@
     <string name="Date">Дата</string>
     <string name="DefaultValue">1</string>
     <string name="DefaultDate">01.02.2019</string>
+    <string name="Result">Результат</string>
+    <string name="Get">Получить</string>
     <string-array name="currencies">
         <item>EUR</item>
         <item>USD</item>

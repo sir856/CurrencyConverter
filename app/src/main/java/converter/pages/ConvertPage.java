@@ -1,10 +1,11 @@
-package com.example.currencyconverter;
+package converter.pages;
 
 import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +23,22 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-public class TwoCurrencies extends Fragment {
+import converter.R;
+import converter.history.History;
+import converter.history.HistoryItem;
+import converter.request.AsyncGetRequest;
+
+public class ConvertPage extends Fragment {
     EditText nominal;
     EditText date;
     TextView answer;
     Spinner fromCurrency;
     Spinner toCurrency;
     final Calendar myCalendar = Calendar.getInstance();
+    final History history = History.getInstance();
 
-    public static TwoCurrencies newInstance() {
-        TwoCurrencies fragment = new TwoCurrencies();
+    public static ConvertPage newInstance() {
+        ConvertPage fragment = new ConvertPage();
         return fragment;
     }
 
@@ -44,7 +51,7 @@ public class TwoCurrencies extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.two_currencies, container, false);
+        final View view = inflater.inflate(R.layout.two_currencies, container, false);
 
         nominal = view.findViewById(R.id.Nominal);
         date = view.findViewById(R.id.Date);
@@ -71,9 +78,17 @@ public class TwoCurrencies extends Fragment {
 
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(v.getContext(), dateListener, myCalendar
+                DatePickerDialog dialog = new DatePickerDialog(v.getContext(), dateListener, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+
+                Calendar minDate = Calendar.getInstance();
+                minDate.set(1999, 0, 1);
+                dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
+
+                dialog.show();
             }
         });
 
@@ -85,12 +100,11 @@ public class TwoCurrencies extends Fragment {
             public void onClick(View v) {
                 // Вычисляем значение конвертируемой валюты
                 convert();
+                view.findViewById(R.id.Card).setVisibility(View.VISIBLE);
             }
         });
         return view;
     }
-
-
 
     private void updateLabel() {
         String myFormat = "dd.MM.yyyy";
@@ -120,7 +134,9 @@ public class TwoCurrencies extends Fragment {
             String fromCurrencyName = fromCurrency.getSelectedItem().toString();
             String toCurrencyName = toCurrency.getSelectedItem().toString();
 
-            double value = Double.valueOf(nominal.getText().toString());
+            String valueStr = nominal.getText().toString();
+
+            double value = !valueStr.equals("") ? Double.valueOf(valueStr) : 0;
             double from = fromCurrencyName.equals("RUB") ? 1 : jsonValute.getJSONObject(fromCurrencyName).getDouble("Value");
             double to = toCurrencyName.equals("RUB") ? 1 : jsonValute.getJSONObject(toCurrencyName).getDouble("Value");
 
@@ -128,12 +144,14 @@ public class TwoCurrencies extends Fragment {
 
             String text = String.format("%.2f %s -> %.2f %s на %s", value, fromCurrencyName, convert, toCurrencyName, dateStr);
             answer.setText(text);
+
+            history.addItem(new HistoryItem(text));
         }
         catch(JSONException ex) {
-
+            answer.setText("Ошибка json");
         }
         catch(ExecutionException | InterruptedException ex) {
-
+            answer.setText("Ошибка при выполнении запроса");
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.currencyconverter;
+package converter.request;
 
 import android.os.AsyncTask;
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,22 +22,83 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/DefaultDate"
             android:textColor="#000"
             android:focusable="false"
             android:clickable="true"
             />
 
         <Button
-            android:id="@+id/ConvertBtn"
+            android:id="@+id/Btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFDD00"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/Get"
             />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/CardUSD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/AnswerUSD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="@string/Result"
+                android:gravity="center" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/CardEUR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/AnswerEUR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="@string/Result"
+                android:gravity="center" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/CardJPY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/AnswerJPY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:text="@string/Result"
+                android:gravity="center" />
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
 </LinearLayout>

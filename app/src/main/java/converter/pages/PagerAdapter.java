@@ -1,18 +1,17 @@
-package com.example.currencyconverter;
+package converter.pages;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[] { "Конвертировать", "Просмотреть курсы", "История" };
-    private Context context;
 
-    public PagerAdapter(FragmentManager fm, Context context) {
+    public PagerAdapter(FragmentManager fm) {
         super(fm);
-        this.context = context;
     }
 
     @Override
@@ -24,11 +23,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return TwoCurrencies.newInstance();
+                return ConvertPage.newInstance();
             case 1:
-                return Currencies.newInstance();
+                return CurrenciesPage.newInstance();
             case 2:
-                return History.newInstance();
+                return HistoryPage.newInstance();
             default:
                 return null;
 
